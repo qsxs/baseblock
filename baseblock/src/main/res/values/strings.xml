@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">baseblock</string>
+
+    <string name="loading">正在加载中…</string>
+    <string name="push_again_to_cancel">再按一次取消</string>
+</resources>
