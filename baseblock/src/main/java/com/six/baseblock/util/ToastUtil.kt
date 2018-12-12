@@ -19,25 +19,36 @@ import com.six.baseblock.R
 object ToastUtil {
     private var lastToast = ""
     private var lastToastTime: Long = 0
+    private lateinit var app: Application
+
+    fun init(application: Application) {
+        app = application
+    }
 
     fun show(@StringRes message: Int) {
-        show(App.context<Application>().getString(message), Toast.LENGTH_SHORT, 0, 0, null)
+        show(app.getString(message), Toast.LENGTH_SHORT, 0, 0, null)
     }
 
     @JvmOverloads
-    fun show(message: String?, duration: Int = Toast.LENGTH_SHORT, icon: Int = 0, gravity: Int = 0, onAttachStateChangeListener: View.OnAttachStateChangeListener? = null) {
+    fun show(
+        message: String?,
+        duration: Int = Toast.LENGTH_SHORT,
+        icon: Int = 0,
+        gravity: Int = 0,
+        onAttachStateChangeListener: View.OnAttachStateChangeListener? = null
+    ) {
         if (!TextUtils.isEmpty(message)) {
             val time = System.currentTimeMillis()
             if (!message.equals(lastToast, ignoreCase = true) || Math.abs(time - lastToastTime) > 2500) {
                 if (icon > 0) {
-                    val view = LayoutInflater.from(App.context()).inflate(R.layout.view_base_toast, null)
+                    val view = LayoutInflater.from(app).inflate(R.layout.view_base_toast, null)
                     val tv = view.findViewById<TextView>(R.id.toast_msg)
                     tv.text = message
                     tv.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0)
                     if (null != onAttachStateChangeListener) {
                         view.addOnAttachStateChangeListener(onAttachStateChangeListener)
                     }
-                    val toast = Toast(App.context())
+                    val toast = Toast(app)
                     toast.view = view
                     if (gravity == Gravity.CENTER) {
                         toast.setGravity(gravity, 0, 0)
@@ -47,7 +58,7 @@ object ToastUtil {
                     toast.duration = duration
                     toast.show()
                 } else {
-                    Toast.makeText(App.context(), message, duration).show()
+                    Toast.makeText(app, message, duration).show()
                 }
                 lastToast = message!!
                 lastToastTime = System.currentTimeMillis()

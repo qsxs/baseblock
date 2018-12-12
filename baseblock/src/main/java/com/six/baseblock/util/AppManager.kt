@@ -35,6 +35,27 @@ object AppManager {
     }
 
     /**
+     * 回到最近一个activity
+     */
+    fun backToActivity(aClass: Class<*>): Boolean {
+        if (activityStack == null) {
+            activityStack = Stack()
+        }
+        for (activity in activityStack!!) {
+            if (activity.javaClass == aClass) {
+                activityStack!!.forEach { act ->
+                    if (act.javaClass != aClass) {
+                        finishActivity(act)
+                    }else {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+    /**
      * 获取当前Activity(堆栈中最后一个压入的)
      */
     fun currentActivity(): Activity {

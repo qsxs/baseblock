@@ -9,7 +9,7 @@ object InputWindowUtils {
 
     fun isActive(context: Context): Boolean {
         val imm = context.getSystemService(Context
-                .INPUT_METHOD_SERVICE) as InputMethodManager//隐藏键盘
+                .INPUT_METHOD_SERVICE) as InputMethodManager
        return imm.isActive
     }
 
