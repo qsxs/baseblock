@@ -41,15 +41,19 @@ object AppManager {
         if (activityStack == null) {
             activityStack = Stack()
         }
+
         for (activity in activityStack!!) {
             if (activity.javaClass == aClass) {
-                activityStack!!.forEach { act ->
-                    if (act.javaClass != aClass) {
-                        finishActivity(act)
-                    }else {
-                        return true
+                var b = true
+                while (b) {
+                    if (activityStack!!.lastElement().javaClass == aClass) {
+                        b = false
+                    } else {
+                        activityStack!!.pop().finish()
                     }
                 }
+                return true
+
             }
         }
         return false
