@@ -5,6 +5,7 @@ import android.provider.Settings
 import java.util.*
 
 object DevicesUtil {
+    @JvmStatic
     fun uuid(): String {
         var token = Settings.System.getString(App.context<Application>().contentResolver, Settings.Secure.ANDROID_ID)
         if (token.isEmpty() || token == "9774d56d682e549c") {
@@ -23,11 +24,13 @@ object DevicesUtil {
     }
 
     private object DevicesSP : BaseSpHelper(App.context(), "DevicesSP") {
-        fun saveInstalltionId(id: String) {
+        @JvmStatic
+    fun saveInstalltionId(id: String) {
             setString("InstalltionID", id)
         }
 
-        fun getInstalltionId(): String? {
+        @JvmStatic
+    fun getInstalltionId(): String? {
             return getString("InstalltionID", null)
         }
     }

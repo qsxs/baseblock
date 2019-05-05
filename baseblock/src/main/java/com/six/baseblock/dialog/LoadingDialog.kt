@@ -3,7 +3,7 @@ package com.six.baseblock.dialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatDialog
+import androidx.appcompat.app.AppCompatDialog
 import android.view.View
 import com.six.baseblock.R
 import com.six.baseblock.util.ToastUtil
@@ -24,7 +24,7 @@ class LoadingDialog(context: Context) : AppCompatDialog(context) {
             tv_msg.visibility = View.VISIBLE
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setDimAmount(0.2f)
+            window?.setDimAmount(0.2f)
         }
     }
 

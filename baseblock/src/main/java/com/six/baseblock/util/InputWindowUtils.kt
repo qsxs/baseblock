@@ -8,6 +8,7 @@ import android.widget.EditText
 
 object InputWindowUtils {
 
+    @JvmStatic
     fun isActive(context: Context): Boolean {
         val imm = context.getSystemService(
             Context
@@ -16,6 +17,7 @@ object InputWindowUtils {
         return imm.isActive
     }
 
+    @JvmStatic
     fun hideInputWindow(context: Context, edt: EditText) {
         val imm = context.getSystemService(
             Context
@@ -25,6 +27,7 @@ object InputWindowUtils {
 
     }
 
+    @JvmStatic
     fun hideInputWindow(view: View) {
         val imm = view.context.getSystemService(
             Context
@@ -34,6 +37,7 @@ object InputWindowUtils {
 
     }
 
+    @JvmStatic
     fun hideInputWindow(activity: Activity) {
         val imm = activity.getSystemService(
             Context
@@ -45,11 +49,13 @@ object InputWindowUtils {
 
     }
 
+    @JvmStatic
     fun showInputWindow(context: Context, edt: EditText) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(edt, 0)
     }
 
+    @JvmStatic
     fun showInputWindow(edt: EditText) {
         val imm = edt.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(edt, 0)

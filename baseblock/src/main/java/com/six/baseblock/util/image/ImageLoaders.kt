@@ -5,12 +5,12 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.support.annotation.CheckResult
-import android.support.annotation.DrawableRes
-import android.support.annotation.RawRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.annotation.CheckResult
+import androidx.annotation.DrawableRes
+import androidx.annotation.RawRes
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import java.io.File
 
@@ -19,33 +19,35 @@ class ImageLoaders private constructor() {
     private lateinit var glide: GlideRequests
 
     companion object {
-        
+        @JvmStatic
         fun with(context: Context): ImageLoaders {
             val loader = ImageLoaders()
             loader.glide = GlideApp.with(context)
             return loader
         }
 
-
+        @JvmStatic
         fun with(activity: Activity): ImageLoaders {
             val loader = ImageLoaders()
             loader.glide = GlideApp.with(activity)
             return loader
         }
 
+        @JvmStatic
         fun with(activity: FragmentActivity): ImageLoaders {
             val loader = ImageLoaders()
             loader.glide = GlideApp.with(activity)
             return loader
         }
 
+        @JvmStatic
         fun with(fragment: Fragment): ImageLoaders {
             val loader = ImageLoaders()
             loader.glide = GlideApp.with(fragment)
             return loader
         }
 
-
+        @JvmStatic
         fun with(view: View): ImageLoaders {
             val loader = ImageLoaders()
             loader.glide = GlideApp.with(view)

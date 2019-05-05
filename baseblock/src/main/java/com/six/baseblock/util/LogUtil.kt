@@ -116,35 +116,42 @@ object LogUtil {
      * @param willPrint      是否打印
      * @param showThreadInfo 打印时时候打印进程信息
      */
+    @JvmStatic
     fun init(willPrint: Boolean, showThreadInfo: Boolean) {
         LogUtil.willPrint = willPrint
         isShowThreadInfo = showThreadInfo
     }
 
+    @JvmStatic
     fun si(message: String) {
         si(tag, message)
     }
 
+    @JvmStatic
     fun si(tag: String, message: String) {
         Log.i(tag, message)
     }
 
+    @JvmStatic
     fun i(message: String, vararg args: Any) {
         log(Log.INFO, message, *args)
     }
 
+    @JvmStatic
     fun d(message: String, vararg args: Any) {
         log(Log.DEBUG, message, *args)
     }
 
+    @JvmStatic
     fun e(message: String, vararg args: Any) {
         log(Log.ERROR, message, *args)
     }
 
+    @JvmStatic
     fun e(msg: String?, throwable: Throwable?, vararg args: Any) {
         var message = msg
         if (throwable != null && message != null) {
-            message += " : " + throwable.toString()
+            message += " : $throwable"
         }
         if (throwable != null && message == null) {
             message = throwable.toString()
@@ -155,14 +162,17 @@ object LogUtil {
         log(Log.ERROR, message, *args)
     }
 
+    @JvmStatic
     fun w(message: String, vararg args: Any) {
         log(Log.WARN, message, *args)
     }
 
+    @JvmStatic
     fun wtf(message: String, vararg args: Any) {
         log(Log.ASSERT, message, *args)
     }
 
+    @JvmStatic
     fun simlpeJson(tag: String, json: String) {
         if (TextUtils.isEmpty(json)) {
             si(tag, json)
@@ -177,6 +187,7 @@ object LogUtil {
         }
     }
 
+    @JvmStatic
     fun json(json: String) {
         if (TextUtils.isEmpty(json)) {
             d("Empty/Null json content")
@@ -193,6 +204,7 @@ object LogUtil {
     }
 
     @Throws(JSONException::class)
+    @JvmStatic
     fun jsonThrowExceptoin(json: String) {
         if (TextUtils.isEmpty(json)) {
             d("Empty/Null json content")
@@ -204,6 +216,7 @@ object LogUtil {
         d(message)
     }
 
+    @JvmStatic
     fun xml(xml: String) {
         if (TextUtils.isEmpty(xml)) {
             d("Empty/Null xml content")
@@ -223,6 +236,7 @@ object LogUtil {
 
     }
 
+    @JvmStatic
     fun sql(sql: String) {
         if (TextUtils.isEmpty(sql)) {
             d("Empty/Null sql content")
@@ -252,11 +266,11 @@ object LogUtil {
         }
 
         val formatSQL = Arrays.toString(sqlArray)
-                .replace("\\[".toRegex(), "")//Arrays.toString后会用一个[]包着，这里把他去掉
-                .replace("]".toRegex(), "")//Arrays.toString后会用一个[]包着，这里把他去掉
-                .replace(",,".toRegex(), "#@#@")//Arrays.toString后每个元素后面会加一个逗号，原先的一个逗号会变成两个，先把原先逗号换成#@#@
-                .replace(",".toRegex(), "")//把多余的逗号去掉
-                .replace("#@#@".toRegex(), ",")//吧原先的逗号还原
+            .replace("\\[".toRegex(), "")//Arrays.toString后会用一个[]包着，这里把他去掉
+            .replace("]".toRegex(), "")//Arrays.toString后会用一个[]包着，这里把他去掉
+            .replace(",,".toRegex(), "#@#@")//Arrays.toString后每个元素后面会加一个逗号，原先的一个逗号会变成两个，先把原先逗号换成#@#@
+            .replace(",".toRegex(), "")//把多余的逗号去掉
+            .replace("#@#@".toRegex(), ",")//吧原先的逗号还原
         d(formatSQL)
     }
 
@@ -317,10 +331,12 @@ object LogUtil {
         var methodCount = methodCount
         val trace = Thread.currentThread().stackTrace
         if (isShowThreadInfo) {
-            logChunk(logType, tag,
-                    HORIZONTAL_DOUBLE_LINE + " Thread: " + Thread.currentThread().name
-                            + "   id:" + Thread.currentThread().id
-                            + "   Priority:" + Thread.currentThread().priority)
+            logChunk(
+                logType, tag,
+                HORIZONTAL_DOUBLE_LINE + " Thread: " + Thread.currentThread().name
+                        + "   id:" + Thread.currentThread().id
+                        + "   Priority:" + Thread.currentThread().priority
+            )
             logDivider(logType, tag)
         }
         val level = ""
@@ -339,16 +355,16 @@ object LogUtil {
             }
             val builder = StringBuilder()
             builder.append("║ ")
-                    .append(level)
-                    .append(getSimpleClassName(trace[stackIndex].className))
-                    .append(".")
-                    .append(trace[stackIndex].methodName)
-                    .append(" ")
-                    .append(" (")
-                    .append(trace[stackIndex].fileName)
-                    .append(":")
-                    .append(trace[stackIndex].lineNumber)
-                    .append(")")
+                .append(level)
+                .append(getSimpleClassName(trace[stackIndex].className))
+                .append(".")
+                .append(trace[stackIndex].methodName)
+                .append(" ")
+                .append(" (")
+                .append(trace[stackIndex].fileName)
+                .append(":")
+                .append(trace[stackIndex].lineNumber)
+                .append(")")
             //            level += "   ";
             logChunk(logType, tag, builder.toString())
         }
@@ -372,7 +388,8 @@ object LogUtil {
      * 打印内容
      */
     private fun logContent(logType: Int, tag: String, chunk: String) {
-        val lines = chunk.split(System.getProperty("line.separator").toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val lines = chunk.split((System.getProperty("line.separator") ?: "=").toRegex()).dropLastWhile { it.isEmpty() }
+            .toTypedArray()
         for (line in lines) {
             logChunk(logType, tag, "$HORIZONTAL_DOUBLE_LINE $line")
         }
@@ -392,7 +409,7 @@ object LogUtil {
             Log.WARN -> Log.w(finalTag, chunk)
             Log.ASSERT -> Log.wtf(finalTag, chunk)
             Log.DEBUG -> Log.d(finalTag, chunk)
-        // Fall through, log debug by default
+            // Fall through, log debug by default
             else -> Log.d(finalTag, chunk)
         }
     }

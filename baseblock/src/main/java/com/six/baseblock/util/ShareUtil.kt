@@ -4,7 +4,8 @@ import android.content.Context
 import android.content.Intent
 
 object ShareUtil {
-    const val storeUrl = ""
+
+    @JvmStatic
     fun shareText(context: Context, text: String, title: CharSequence?) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain" //分享的是文本类型

@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Handler
 import android.os.Looper
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import com.six.baseblock.R
 import com.six.baseblock.dialog.LoadingDialog
 
@@ -17,6 +17,7 @@ import com.six.baseblock.dialog.LoadingDialog
 object LoadingDialogUtil {
     private var mDialog: Dialog? = null
 
+    @JvmStatic
     fun newLoadingDialog(context: Context, message: CharSequence? = context.getString(R.string.loading), onCancelListener: DialogInterface.OnCancelListener? = null): LoadingDialog {
         val dialog = LoadingDialog(context)
         dialog.setMessage(message)
@@ -33,6 +34,7 @@ object LoadingDialogUtil {
      * onCancelListener不为null的时候可以点击外部取消弹窗
      */
     @JvmOverloads
+    @JvmStatic
     fun show(context: Context, @StringRes message: Int, onCancelListener: DialogInterface.OnCancelListener? = null) {
         show(context, context.getString(message), onCancelListener)
     }
@@ -41,6 +43,7 @@ object LoadingDialogUtil {
      * onCancelListener不为null的时候可以点击外部取消弹窗
      */
     @JvmOverloads
+    @JvmStatic
     fun show(context: Context, message: CharSequence? = context.getString(R.string.loading), onCancelListener: DialogInterface.OnCancelListener? = null) {
         if (mDialog != null) {
             dismiss()
@@ -58,6 +61,7 @@ object LoadingDialogUtil {
     }
 
 
+    @JvmStatic
     fun dismiss() {
         try {
             mDialog!!.dismiss()
@@ -68,6 +72,7 @@ object LoadingDialogUtil {
         }
     }
 
+    @JvmStatic
     fun dismissDelayed(delayMillis: Long) {
         Handler(Looper.getMainLooper()).postDelayed({ dismiss() }, delayMillis)
     }

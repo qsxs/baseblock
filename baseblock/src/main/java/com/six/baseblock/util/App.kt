@@ -10,6 +10,8 @@ object App {
     private var debug: Boolean = false
     private lateinit var flavor: String
     private lateinit var buildType: String
+
+    @JvmStatic
     fun init(app: Application, versionName: String, versionCode: Int, applicationId: String, debug: Boolean, flavor: String, buildType: String) {
         application = app
         App.versionName = versionName
@@ -20,31 +22,38 @@ object App {
         App.buildType = buildType
     }
 
+    @JvmStatic
     @Suppress("UNCHECKED_CAST")
     fun <T : Application> context(): T {
         return application as T
     }
 
+    @JvmStatic
     fun appVersionName(): String {
         return versionName
     }
 
+    @JvmStatic
     fun appVersionCode(): Int {
         return versionCode
     }
 
+    @JvmStatic
     fun applicationId(): String {
         return applicationId
     }
 
+    @JvmStatic
     fun debug(): Boolean {
         return debug
     }
 
+    @JvmStatic
     fun flavor(): String {
         return flavor
     }
 
+    @JvmStatic
     fun buildType(): String {
         return buildType
     }

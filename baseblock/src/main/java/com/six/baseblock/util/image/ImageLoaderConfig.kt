@@ -1,6 +1,6 @@
 package com.six.baseblock.util.image
 
-import android.support.annotation.DrawableRes
+import androidx.annotation.DrawableRes
 
 object ImageLoaderConfig {
     @DrawableRes
@@ -11,6 +11,7 @@ object ImageLoaderConfig {
     var errorDrawableRes: Int = 0
 
 
+    @JvmStatic
     @JvmOverloads
     fun init(@DrawableRes placeholderDrawableRes: Int, @DrawableRes fallbackDrawableRes: Int = 0, @DrawableRes errorDrawableRes: Int = 0) {
         this.placeholderDrawableRes = placeholderDrawableRes

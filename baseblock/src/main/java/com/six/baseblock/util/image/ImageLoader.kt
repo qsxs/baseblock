@@ -3,9 +3,9 @@ package com.six.baseblock.util.image
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.support.annotation.CheckResult
-import android.support.annotation.DrawableRes
-import android.support.annotation.RawRes
+import androidx.annotation.CheckResult
+import androidx.annotation.DrawableRes
+import androidx.annotation.RawRes
 import java.io.File
 
 class ImageLoader<T>(private var glide: GlideRequest<T>) {

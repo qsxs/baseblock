@@ -1,7 +1,7 @@
 package com.six.baseblock.util
 
 import android.app.Application
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -21,15 +21,18 @@ object ToastUtil {
     private var lastToastTime: Long = 0
     private lateinit var app: Application
 
+    @JvmStatic
     fun init(application: Application) {
         app = application
     }
 
+    @JvmStatic
     fun show(@StringRes message: Int) {
         show(app.getString(message), Toast.LENGTH_SHORT, 0, 0, null)
     }
 
     @JvmOverloads
+    @JvmStatic
     fun show(
         message: String?,
         duration: Int = Toast.LENGTH_SHORT,
