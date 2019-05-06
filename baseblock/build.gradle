@@ -11,13 +11,15 @@ android {
         versionCode 1
         versionName "1.0"
 
+        consumerProguardFiles 'proguard-rules.pro'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
+            shrinkResources false//去除无用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
