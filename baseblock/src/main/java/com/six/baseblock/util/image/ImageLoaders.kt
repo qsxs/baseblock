@@ -73,7 +73,12 @@ class ImageLoaders private constructor() {
 
     @CheckResult
     fun load(bitmap: Bitmap?): GlideRequest<Drawable> {
-        val request = glide.load(bitmap)
+        var finalSource = bitmap
+        if (ImageLoaderConfig.filter != null) {
+            finalSource = ImageLoaderConfig.filter?.filter(bitmap)
+        }
+        val request = glide.load(finalSource)
+
         if (ImageLoaderConfig.placeholderDrawableRes > 0) {
             request.placeholder(ImageLoaderConfig.placeholderDrawableRes)
         }
@@ -90,7 +95,11 @@ class ImageLoaders private constructor() {
 
     @CheckResult
     fun load(drawable: Drawable?): GlideRequest<Drawable> {
-        val request = glide.load(drawable)
+        var finalSource = drawable
+        if (ImageLoaderConfig.filter != null) {
+            finalSource = ImageLoaderConfig.filter?.filter(drawable)
+        }
+        val request = glide.load(finalSource)
         if (ImageLoaderConfig.placeholderDrawableRes > 0) {
             request.placeholder(ImageLoaderConfig.placeholderDrawableRes)
         }
@@ -105,7 +114,11 @@ class ImageLoaders private constructor() {
 
     @CheckResult
     fun load(string: String?): GlideRequest<Drawable> {
-        val request = glide.load(string)
+        var finalSource = string
+        if (ImageLoaderConfig.filter != null) {
+            finalSource = ImageLoaderConfig.filter?.filter(string)
+        }
+        val request = glide.load(finalSource)
         if (ImageLoaderConfig.placeholderDrawableRes > 0) {
             request.placeholder(ImageLoaderConfig.placeholderDrawableRes)
         }
@@ -120,7 +133,12 @@ class ImageLoaders private constructor() {
 
     @CheckResult
     fun load(uri: Uri?): GlideRequest<Drawable> {
-        val request = glide.load(uri)
+        var finalSource = uri
+                if (ImageLoaderConfig.filter != null) {
+                    finalSource = ImageLoaderConfig.filter?.filter(uri)
+                }
+        val request = glide.load(finalSource)
+
         if (ImageLoaderConfig.placeholderDrawableRes > 0) {
             request.placeholder(ImageLoaderConfig.placeholderDrawableRes)
         }
@@ -135,7 +153,12 @@ class ImageLoaders private constructor() {
 
     @CheckResult
     fun load(file: File?): GlideRequest<Drawable> {
-        val request = glide.load(file)
+        var finalSource = file
+        if (ImageLoaderConfig.filter != null) {
+            finalSource = ImageLoaderConfig.filter?.filter(file)
+        }
+        val request = glide.load(finalSource)
+
         if (ImageLoaderConfig.placeholderDrawableRes > 0) {
             request.placeholder(ImageLoaderConfig.placeholderDrawableRes)
         }
@@ -150,7 +173,12 @@ class ImageLoaders private constructor() {
 
     @CheckResult
     fun load(@RawRes @DrawableRes id: Int?): GlideRequest<Drawable> {
-        val request = glide.load(id)
+        var finalSource = id
+        if (ImageLoaderConfig.filter != null) {
+            finalSource = ImageLoaderConfig.filter?.filter(id)
+        }
+        val request = glide.load(finalSource)
+
         if (ImageLoaderConfig.placeholderDrawableRes > 0) {
             request.placeholder(ImageLoaderConfig.placeholderDrawableRes)
         }
@@ -165,7 +193,12 @@ class ImageLoaders private constructor() {
 
     @CheckResult
     fun load(bytes: ByteArray?): GlideRequest<Drawable> {
-        val request = glide.load(bytes)
+        var finalSource = bytes
+        if (ImageLoaderConfig.filter != null) {
+            finalSource = ImageLoaderConfig.filter?.filter(bytes)
+        }
+        val request = glide.load(finalSource)
+
         if (ImageLoaderConfig.placeholderDrawableRes > 0) {
             request.placeholder(ImageLoaderConfig.placeholderDrawableRes)
         }
@@ -180,7 +213,12 @@ class ImageLoaders private constructor() {
 
     @CheckResult
     fun load(o: Any?): GlideRequest<Drawable> {
-        val request = glide.load(o)
+        var finalSource = o
+        if (ImageLoaderConfig.filter != null) {
+            finalSource = ImageLoaderConfig.filter?.filter(o)
+        }
+        val request = glide.load(finalSource)
+
         if (ImageLoaderConfig.placeholderDrawableRes > 0) {
             request.placeholder(ImageLoaderConfig.placeholderDrawableRes)
         }
