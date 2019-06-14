@@ -11,11 +11,13 @@ object ImageLoaderConfig {
     @DrawableRes
     var errorDrawableRes: Int = 0
 
+    var filterByDefault = true
+
     var filter: ImageLoaderSourceFilter? = null
 
     @JvmStatic
     @JvmOverloads
-    @Deprecated("弃用",level = DeprecationLevel.WARNING)
+    @Deprecated("弃用", level = DeprecationLevel.WARNING)
     fun init(@DrawableRes placeholderDrawableRes: Int, @DrawableRes fallbackDrawableRes: Int = 0, @DrawableRes errorDrawableRes: Int = 0) {
         this.placeholderDrawableRes = placeholderDrawableRes
         this.fallbackDrawableRes = fallbackDrawableRes
@@ -23,26 +25,32 @@ object ImageLoaderConfig {
     }
 
     @JvmStatic
-    fun setPlaceholderDrawableRes(@DrawableRes @RawRes placeholderDrawableRes: Int):ImageLoaderConfig{
+    fun setPlaceholderDrawableRes(@DrawableRes @RawRes placeholderDrawableRes: Int): ImageLoaderConfig {
         this.placeholderDrawableRes = placeholderDrawableRes
         return this
     }
 
     @JvmStatic
-    fun setFallbackDrawableRes(@DrawableRes @RawRes fallbackDrawableRes: Int):ImageLoaderConfig{
+    fun setFallbackDrawableRes(@DrawableRes @RawRes fallbackDrawableRes: Int): ImageLoaderConfig {
         this.fallbackDrawableRes = fallbackDrawableRes
         return this
     }
 
     @JvmStatic
-    fun setErrorDrawableRes(@DrawableRes @RawRes errorDrawableRes: Int):ImageLoaderConfig{
+    fun setErrorDrawableRes(@DrawableRes @RawRes errorDrawableRes: Int): ImageLoaderConfig {
         this.errorDrawableRes = errorDrawableRes
         return this
     }
 
     @JvmStatic
-    fun setImageLoaderSourceFilter(filter: ImageLoaderSourceFilter?):ImageLoaderConfig{
+    fun setImageLoaderSourceFilter(filter: ImageLoaderSourceFilter?): ImageLoaderConfig {
         this.filter = filter
+        return this
+    }
+
+    @JvmStatic
+    fun setFilterByDefault(value: Boolean): ImageLoaderConfig {
+        this.filterByDefault = value
         return this
     }
 }

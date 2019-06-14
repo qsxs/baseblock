@@ -11,7 +11,7 @@ import java.io.File
 class ImageLoader<T>(private var glide: GlideRequest<T>) {
     @JvmOverloads
     @CheckResult
-    fun load(bitmap: Bitmap?,filter:Boolean = true): GlideRequest<T> {
+    fun load(bitmap: Bitmap?,filter:Boolean = ImageLoaderConfig.filterByDefault): GlideRequest<T> {
         var finalSource = bitmap
         if (ImageLoaderConfig.filter != null  && filter) {
             finalSource = ImageLoaderConfig.filter?.filter(bitmap)
@@ -32,7 +32,7 @@ class ImageLoader<T>(private var glide: GlideRequest<T>) {
 
     @JvmOverloads
     @CheckResult
-    fun load(drawable: Drawable?,filter:Boolean = true): GlideRequest<T> {
+    fun load(drawable: Drawable?,filter:Boolean = ImageLoaderConfig.filterByDefault): GlideRequest<T> {
         var finalSource = drawable
         if (ImageLoaderConfig.filter != null  && filter) {
             finalSource = ImageLoaderConfig.filter?.filter(drawable)
@@ -53,7 +53,7 @@ class ImageLoader<T>(private var glide: GlideRequest<T>) {
 
     @JvmOverloads
     @CheckResult
-    fun load(string: String?,filter:Boolean = true): GlideRequest<T> {
+    fun load(string: String?,filter:Boolean = ImageLoaderConfig.filterByDefault): GlideRequest<T> {
         var finalSource = string
         if (ImageLoaderConfig.filter != null  && filter) {
             finalSource = ImageLoaderConfig.filter?.filter(string)
@@ -74,7 +74,7 @@ class ImageLoader<T>(private var glide: GlideRequest<T>) {
 
     @JvmOverloads
     @CheckResult
-    fun load(uri: Uri?,filter:Boolean = true): GlideRequest<T> {
+    fun load(uri: Uri?,filter:Boolean = ImageLoaderConfig.filterByDefault): GlideRequest<T> {
         var finalSource = uri
         if (ImageLoaderConfig.filter != null  && filter) {
             finalSource = ImageLoaderConfig.filter?.filter(uri)
@@ -95,7 +95,7 @@ class ImageLoader<T>(private var glide: GlideRequest<T>) {
 
     @JvmOverloads
     @CheckResult
-    fun load(file: File?,filter:Boolean = true): GlideRequest<T> {
+    fun load(file: File?,filter:Boolean = ImageLoaderConfig.filterByDefault): GlideRequest<T> {
         var finalSource = file
         if (ImageLoaderConfig.filter != null  && filter) {
             finalSource = ImageLoaderConfig.filter?.filter(file)
@@ -116,7 +116,7 @@ class ImageLoader<T>(private var glide: GlideRequest<T>) {
 
     @JvmOverloads
     @CheckResult
-    fun load(@RawRes @DrawableRes id: Int?,filter:Boolean = true): GlideRequest<T> {
+    fun load(@RawRes @DrawableRes id: Int?,filter:Boolean = ImageLoaderConfig.filterByDefault): GlideRequest<T> {
         var finalSource = id
         if (ImageLoaderConfig.filter != null  && filter) {
             finalSource = ImageLoaderConfig.filter?.filter(id)
@@ -137,7 +137,7 @@ class ImageLoader<T>(private var glide: GlideRequest<T>) {
 
     @JvmOverloads
     @CheckResult
-    fun load(bytes: ByteArray?,filter:Boolean = true): GlideRequest<T> {
+    fun load(bytes: ByteArray?,filter:Boolean = ImageLoaderConfig.filterByDefault): GlideRequest<T> {
         var finalSource = bytes
         if (ImageLoaderConfig.filter != null  && filter) {
             finalSource = ImageLoaderConfig.filter?.filter(bytes)
@@ -158,7 +158,7 @@ class ImageLoader<T>(private var glide: GlideRequest<T>) {
 
     @JvmOverloads
     @CheckResult
-    fun load(o: Any?,filter:Boolean = true): GlideRequest<T> {
+    fun load(o: Any?,filter:Boolean = ImageLoaderConfig.filterByDefault): GlideRequest<T> {
         var finalSource = o
         if (ImageLoaderConfig.filter != null && filter) {
             finalSource = ImageLoaderConfig.filter?.filter(o)
