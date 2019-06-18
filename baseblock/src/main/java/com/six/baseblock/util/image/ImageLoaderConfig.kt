@@ -25,19 +25,19 @@ object ImageLoaderConfig {
     }
 
     @JvmStatic
-    fun setPlaceholderDrawableRes(@DrawableRes @RawRes placeholderDrawableRes: Int): ImageLoaderConfig {
+    fun setPlaceholderRes(@DrawableRes @RawRes placeholderDrawableRes: Int): ImageLoaderConfig {
         this.placeholderDrawableRes = placeholderDrawableRes
         return this
     }
 
     @JvmStatic
-    fun setFallbackDrawableRes(@DrawableRes @RawRes fallbackDrawableRes: Int): ImageLoaderConfig {
+    fun setFallbackRes(@DrawableRes @RawRes fallbackDrawableRes: Int): ImageLoaderConfig {
         this.fallbackDrawableRes = fallbackDrawableRes
         return this
     }
 
     @JvmStatic
-    fun setErrorDrawableRes(@DrawableRes @RawRes errorDrawableRes: Int): ImageLoaderConfig {
+    fun setErrorRes(@DrawableRes @RawRes errorDrawableRes: Int): ImageLoaderConfig {
         this.errorDrawableRes = errorDrawableRes
         return this
     }
@@ -49,7 +49,7 @@ object ImageLoaderConfig {
     }
 
     @JvmStatic
-    fun setFilterByDefault(value: Boolean): ImageLoaderConfig {
+    fun setFilterDefault(value: Boolean): ImageLoaderConfig {
         this.filterByDefault = value
         return this
     }
