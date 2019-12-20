@@ -4,15 +4,22 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes
 
 object ImageLoaderConfig {
+    @JvmStatic
     @DrawableRes
     var placeholderDrawableRes: Int = 0
+
+    @JvmStatic
     @DrawableRes
     var fallbackDrawableRes: Int = 0
+
+    @JvmStatic
     @DrawableRes
     var errorDrawableRes: Int = 0
 
+    @JvmStatic
     var filterByDefault = true
 
+    @JvmStatic
     var filter: ImageLoaderSourceFilter? = null
 
     @JvmStatic
