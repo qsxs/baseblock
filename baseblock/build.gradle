@@ -16,6 +16,10 @@ android {
 
     }
 
+    libraryVariants.all {
+        it.generateBuildConfigProvider.configure { enabled = false }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
