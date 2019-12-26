@@ -7,7 +7,29 @@ import android.util.DisplayMetrics
 import android.view.WindowManager
 
 object DensityUtil {
-//    companion object {
+    @JvmStatic
+    fun getStatusBarHeight(context: Context): Int {
+        val result: Int
+        val resourceId =
+            context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        result = if (resourceId > 0) {
+            context.resources.getDimensionPixelSize(resourceId)
+        } else {
+            dip2px(context, 24f)
+        }
+        return result
+    }
+
+    @JvmStatic
+    fun getNavigationBarHeight(context: Context): Int {
+        val resourceId: Int =
+            context.resources.getIdentifier("navigation_bar_height", "dimen", "android")
+        return if (resourceId > 0) {
+            context.resources.getDimensionPixelSize(resourceId)
+        } else {
+            0
+        }
+    }
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
@@ -86,5 +108,4 @@ object DensityUtil {
         context.window.decorView.getWindowVisibleDisplayFrame(frame)
         return frame.top
     }
-//    }
 }

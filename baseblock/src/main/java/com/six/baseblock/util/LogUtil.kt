@@ -129,7 +129,7 @@ object LogUtil {
 
     @JvmStatic
     fun si(tag: String, message: String) {
-        Log.i(tag, message)
+        if (willPrint) Log.i(tag, message)
     }
 
     @JvmStatic
@@ -242,7 +242,8 @@ object LogUtil {
             d("Empty/Null sql content")
             return
         }
-        val sqlArray = sql.trim { it <= ' ' }.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val sqlArray = sql.trim { it <= ' ' }.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }
+            .toTypedArray()
         var hasBetween = false
         for (i in sqlArray.indices) {
             val s = sqlArray[i]
@@ -388,7 +389,8 @@ object LogUtil {
      * 打印内容
      */
     private fun logContent(logType: Int, tag: String, chunk: String) {
-        val lines = chunk.split((System.getProperty("line.separator") ?: "=").toRegex()).dropLastWhile { it.isEmpty() }
+        val lines = chunk.split((System.getProperty("line.separator") ?: "=").toRegex())
+            .dropLastWhile { it.isEmpty() }
             .toTypedArray()
         for (line in lines) {
             logChunk(logType, tag, "$HORIZONTAL_DOUBLE_LINE $line")
