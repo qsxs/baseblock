@@ -2,27 +2,21 @@ package com.six.baseblock.util
 
 import android.app.Activity
 import java.util.*
+import kotlin.system.exitProcess
 
 /**
  * 应用程序Activity管理类:用于Activity管理和应用程序退出
  */
 object AppManager {
-
-//    companion object {
-
-
     private var activityStack: Stack<Activity>? = null
-//        private var instance: AppManager? = null
 
-
-//        fun getInstance(): AppManager {
-//            if (instance == null) {
-//                synchronized(AppManager::class.java) {
-//                    instance = AppManager()
-//                }
-//            }
-//            return instance!!
-//        }
+    @JvmStatic
+    fun activityStack(): Stack<Activity> {
+        if (activityStack == null) {
+            activityStack = Stack()
+        }
+        return activityStack!!
+    }
 
     /**
      * 添加Activity到堆栈
@@ -44,7 +38,7 @@ object AppManager {
             activityStack = Stack()
         }
 
-        for (activity in activityStack!!) {
+        for (activity in activityStack()) {
             if (activity.javaClass == aClass) {
                 var b = true
                 while (b) {
@@ -65,8 +59,8 @@ object AppManager {
      * 获取当前Activity(堆栈中最后一个压入的)
      */
     @JvmStatic
-    fun currentActivity(): Activity {
-        return activityStack!!.lastElement()
+    fun currentActivity(): Activity? {
+        return activityStack?.lastElement()
         //        return activity;
     }
 
@@ -75,7 +69,7 @@ object AppManager {
      */
     @JvmStatic
     fun finishActivity() {
-        val activity = activityStack!!.lastElement()
+        val activity = activityStack?.lastElement()
         finishActivity(activity)
     }
 
@@ -108,7 +102,7 @@ object AppManager {
     @JvmStatic
     fun finishAllActivity() {
         var i = 0
-        val size = activityStack!!.size
+        val size = activityStack().size
         while (i < size) {
             if (null != activityStack!![i]) {
                 //				activityStack.get(i).finish();
@@ -124,17 +118,12 @@ object AppManager {
      */
     @JvmStatic
     fun removeActivity(activity: Activity) {
-        if (activityStack == null) {
-            return
-        }
-        activityStack!!.remove(activity)
+        activityStack?.remove(activity)
     }
 
     @JvmStatic
     fun activitySize(): Int {
-        return if (null == activityStack) {
-            0
-        } else activityStack!!.size
+        return activityStack?.size ?: 0
     }
 
     /**
@@ -142,11 +131,11 @@ object AppManager {
      */
     @JvmStatic
     fun appExit() {
-        //        finishAllActivity();
+        finishAllActivity()
         //友盟统计
         //        MobclickAgent.onKillProcess(App.context());
         android.os.Process.killProcess(android.os.Process.myPid())
-        System.exit(0)
+        exitProcess(0)
     }
 //    }
 }
