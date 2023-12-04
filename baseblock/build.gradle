@@ -1,46 +1,73 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
 android {
-    compileSdkVersion 28
-
-    defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 3
-        versionName "1.0.2"
-
-        consumerProguardFiles 'proguard-rules.txt'
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+    compileSdk 31
+    viewBinding {
+        enabled = true
     }
+    defaultConfig {
+        minSdk 21
+        targetSdk 31
 
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
     libraryVariants.all {
+        //不生成BuildConfig
         it.generateBuildConfigProvider.configure { enabled = false }
     }
-
     buildTypes {
         release {
             minifyEnabled false
-            shrinkResources false//去除无用资源
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    namespace 'com.lihb.baseblock'
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'com.github.bumptech.glide:glide:4.10.0'
-    kapt 'com.github.bumptech.glide:compiler:4.10.0'
-}
-repositories {
-    mavenCentral()
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation "androidx.window:window:1.0.0"
+    implementation 'androidx.palette:palette-ktx:1.0.0'
+//    implementation "androidx.window:window-rxjava3:1.0.0"
+//    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.tencent:mmkv-static:1.2.7'
+//    api 'com.tencent.tbs.tbssdk:sdk:43939'
+
+    //viewBinding封装库
+    implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-ktx:1.2.4'
+    implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-nonreflection-ktx:1.2.4'
+    implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:1.2.4'
+    implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-brvah:1.2.4'
+
+    api 'com.github.bumptech.glide:glide:4.13.1'
+    kapt 'com.github.bumptech.glide:compiler:4.13.1'
+    api 'jp.wasabeef:glide-transformations:4.3.0'
+
+//    api 'com.github.wendux:DSBridge-Android:3.0-SNAPSHOT'
+    //support the x5 browser core of tencent
+//    api 'com.github.wendux:DSBridge-Android:x5-3.0-SNAPSHOT'
+    api 'com.tencent.tbs:tbssdk:44286'
+
+    api 'androidx.recyclerview:recyclerview:1.3.0'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

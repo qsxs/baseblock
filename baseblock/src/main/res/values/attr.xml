@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="ratio" format="float" />
+    <attr name="corner_radius" format="dimension" />
+    <attr name="indicator_fillColor" format="color" />
+    <attr name="indicator_pageColor" format="color" />
+    <attr name="indicator_radius" format="dimension" />
+    <attr name="indicator_snap" format="boolean" />
+    <attr name="indicator_strokeColor" format="color" />
+    <attr name="indicator_lineWidth" format="dimension" />
+    <attr name="indicator_gapWidth" format="dimension" />
+    <attr name="title" format="string" />
+
+    <declare-styleable name="AutoBanner">
+        <attr name="ratio" />
+        <attr name="android:maxWidth" />
+        <attr name="android:maxHeight" />
+        <attr name="need_indicator" format="boolean" />
+        <attr name="corner_radius" />
+    </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="is_circle" format="boolean" />
+        <attr name="is_cover_src" format="boolean" />
+        <attr name="corner_radius" />
+        <attr name="corner_top_left_radius" format="dimension" />
+        <attr name="corner_top_right_radius" format="dimension" />
+        <attr name="corner_bottom_left_radius" format="dimension" />
+        <attr name="corner_bottom_right_radius" format="dimension" />
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="inner_border_width" format="dimension" />
+        <attr name="inner_border_color" format="color" />
+        <attr name="mask_color" format="color" />
+        <attr name="ratio" />
+    </declare-styleable>
+
+    <declare-styleable name="DrawableTextView">
+        <attr name="drawableLeftWidth" format="dimension" />
+        <attr name="drawableLeftHeight" format="dimension" />
+        <attr name="drawableTopWidth" format="dimension" />
+        <attr name="drawableTopHeight" format="dimension" />
+        <attr name="drawableRightWidth" format="dimension" />
+        <attr name="drawableRightHeight" format="dimension" />
+        <attr name="drawableBottomWidth" format="dimension" />
+        <attr name="drawableBottomHeight" format="dimension" />
+    </declare-styleable>
+
+    <!--<declare-styleable name="ViewPagerIndicator">-->
+    <!--&lt;!&ndash; Style of the circle indicator. &ndash;&gt;-->
+    <!--<attr name="vpiCirclePageIndicatorStyle" format="reference" />-->
+    <!--&lt;!&ndash; Style of the icon indicator's views. &ndash;&gt;-->
+    <!--<attr name="vpiIconPageIndicatorStyle" format="reference" />-->
+    <!--&lt;!&ndash; Style of the line indicator. &ndash;&gt;-->
+    <!--<attr name="vpiLinePageIndicatorStyle" format="reference" />-->
+    <!--&lt;!&ndash; Style of the title indicator. &ndash;&gt;-->
+    <!--<attr name="vpiTitlePageIndicatorStyle" format="reference" />-->
+    <!--&lt;!&ndash; Style of the tab indicator's tabs. &ndash;&gt;-->
+    <!--<attr name="vpiTabPageIndicatorStyle" format="reference" />-->
+    <!--&lt;!&ndash; Style of the underline indicator. &ndash;&gt;-->
+    <!--<attr name="vpiUnderlinePageIndicatorStyle" format="reference" />-->
+    <!--</declare-styleable>-->
+
+    <attr name="indicator_centered" format="boolean" />
+    <attr name="indicator_selectedColor" format="color" />
+    <attr name="indicator_unselectedColor" format="color" />
+    <attr name="indicator_strokeWidth" format="dimension" />
+
+    <declare-styleable name="CirclePageIndicator">
+        <!-- Whether or not the indicators should be centered. -->
+        <attr name="indicator_centered" />
+        <!-- Color of the filled circle that represents the current page. -->
+        <attr name="indicator_fillColor" />
+        <!-- Color of the filled circles that represents pages. -->
+        <attr name="indicator_pageColor" />
+        <!-- Orientation of the indicator. -->
+        <attr name="android:orientation" />
+        <!-- Radius of the circles. This is also the spacing between circles. -->
+        <attr name="indicator_radius" />
+        <!-- Whether or not the selected indicator snaps to the circles. -->
+        <attr name="indicator_snap" />
+        <!-- Color of the open circles. -->
+        <attr name="indicator_strokeColor" />
+        <!-- Width of the stroke used to draw the circles. -->
+        <attr name="indicator_strokeWidth" />
+        <!-- View background -->
+        <attr name="android:background" />
+    </declare-styleable>
+
+    <declare-styleable name="LinePageIndicator">
+        <!-- Whether or not the indicators should be centered. -->
+        <attr name="indicator_centered" />
+        <!-- Color of the unselected lines that represent the pages. -->
+        <attr name="indicator_unselectedColor" />
+        <!-- Color of the selected line that represents the current page. -->
+        <attr name="indicator_selectedColor" />
+        <!-- Width of each indicator line. -->
+        <attr name="indicator_lineWidth" />
+        <!-- Width of each indicator line's stroke. -->
+        <attr name="indicator_strokeWidth" />
+        <!-- Width of the gap between each indicator line. -->
+        <attr name="indicator_gapWidth" />
+        <!-- View background -->
+        <attr name="android:background" />
+    </declare-styleable>
+    <declare-styleable name="CirclePageIndicator2">
+        <!-- Whether or not the indicators should be centered. -->
+        <attr name="indicator_centered" />
+        <!-- Color of the filled circle that represents the current page. -->
+        <attr name="indicator_fillColor" />
+        <!-- Color of the filled circles that represents pages. -->
+        <attr name="indicator_pageColor" />
+        <!-- Orientation of the indicator. -->
+        <attr name="android:orientation" />
+        <!-- Radius of the circles. This is also the spacing between circles. -->
+        <attr name="indicator_radius" />
+        <!-- Whether or not the selected indicator snaps to the circles. -->
+        <attr name="indicator_snap" />
+        <!-- Color of the open circles. -->
+        <attr name="indicator_strokeColor" />
+        <!-- Width of the stroke used to draw the circles. -->
+        <attr name="indicator_strokeWidth" />
+        <!-- View background -->
+        <attr name="android:background" />
+    </declare-styleable>
+    <declare-styleable name="LinePageIndicator2">
+        <!-- Whether or not the indicators should be centered. -->
+        <attr name="indicator_centered" />
+        <!-- Color of the unselected lines that represent the pages. -->
+        <attr name="indicator_unselectedColor" />
+        <!-- Color of the selected line that represents the current page. -->
+        <attr name="indicator_selectedColor" />
+        <!-- Width of each indicator line. -->
+        <attr name="indicator_lineWidth" />
+        <!-- Width of each indicator line's stroke. -->
+        <attr name="indicator_strokeWidth" />
+        <!-- Width of the gap between each indicator line. -->
+        <attr name="indicator_gapWidth" />
+        <!-- View background -->
+        <attr name="android:background" />
+    </declare-styleable>
+</resources>

@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawablePadding="18dp"
-        android:paddingBottom="4dp"
-        android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:paddingTop="4dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp"
         android:textColor="@color/text_primary"
         android:textSize="@dimen/text_body_size"
         tools:text="哈哈哈哈" />
