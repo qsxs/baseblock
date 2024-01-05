@@ -3,7 +3,7 @@ package com.lihb.baseblock.util
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import java.util.*
+import java.util.LinkedList
 import kotlin.reflect.KClass
 import kotlin.system.exitProcess
 
@@ -38,10 +38,19 @@ object ActManager {
 
     fun activityStack() = activityLinkedList
 
+    @Deprecated(
+        "弃用",
+        replaceWith = ReplaceWith("backToActivity(aClass)"),
+        level = DeprecationLevel.WARNING
+    )
+    fun backToActivityJava(aClass: Class<out Activity>): Boolean {
+        return backToActivity(aClass)
+    }
+
     /**
      * 回到最近一个activity
      */
-    fun backToActivityJava(aClass: Class<out Activity>): Boolean {
+    fun backToActivity(aClass: Class<out Activity>): Boolean {
         if (activityLinkedList.firstOrNull() == null) return false
         var b = true
         while (b) {
@@ -56,17 +65,7 @@ object ActManager {
     }
 
     fun backToActivity(kClass: KClass<out Activity>): Boolean {
-        if (activityLinkedList.firstOrNull() == null) return false
-        var b = true
-        while (b) {
-            val firstOrNull = activityLinkedList.firstOrNull() ?: return false
-            if (firstOrNull::class == kClass) {
-                b = false
-            } else {
-                activityLinkedList.pop().finish()
-            }
-        }
-        return !b
+        return backToActivity(kClass.java)
     }
 
     /**
@@ -91,9 +90,9 @@ object ActManager {
     }
 
     /**
-     * 结束指定类名的Activity
+     * 结束指定类名最新的一个Activity
      */
-    fun finishActivity(aClass: Class<out Activity>) {
+    fun finishActivityNewestOne(aClass: Class<out Activity>) {
         for (activity in activityLinkedList) {
             if (activity.javaClass == aClass) {
                 finishActivity(activity)
@@ -103,15 +102,28 @@ object ActManager {
     }
 
     /**
+     * 结束指定类名最新的一个Activity
+     */
+    fun finishActivityNewestOne(kClass: KClass<out Activity>) {
+        finishActivityNewestOne(kClass.java)
+    }
+
+    /**
+     * 结束指定类名的Activity
+     */
+    fun finishActivity(aClass: Class<out Activity>) {
+        for (activity in activityLinkedList) {
+            if (activity.javaClass == aClass) {
+                finishActivity(activity)
+            }
+        }
+    }
+
+    /**
      * 结束指定类名的Activity
      */
     fun finishActivity(kClass: KClass<out Activity>) {
-        for (activity in activityLinkedList) {
-            if (activity::class == kClass) {
-                finishActivity(activity)
-                break
-            }
-        }
+        finishActivity(kClass.java)
     }
 
 
