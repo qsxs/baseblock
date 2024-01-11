@@ -68,6 +68,14 @@ object ActManager {
         return backToActivity(kClass.java)
     }
 
+    fun isExistActivity(aClass: Class<out Activity>): Boolean {
+        return activityStack().firstOrNull { it::class.java == aClass } != null
+    }
+
+    fun isExistActivity(kClass: KClass<out Activity>): Boolean {
+        return isExistActivity(kClass.java)
+    }
+
     /**
      * 获取当前Activity(堆栈中最后一个压入的)
      */

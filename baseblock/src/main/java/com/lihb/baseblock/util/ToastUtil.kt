@@ -1,16 +1,18 @@
 package com.lihb.baseblock.util
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
-import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.lihb.baseblock.R
+import kotlin.math.abs
 
 
 /**
@@ -19,37 +21,86 @@ import com.lihb.baseblock.R
  */
 
 object ToastUtil {
-    private var lastToast = ""
+    private var lastToast: CharSequence = ""
+    private var lastDuration = -99
     private var lastToastTime: Long = 0
     private lateinit var app: Application
     private val mainHandler by lazy { Handler(Looper.getMainLooper()) }
 
+    @DrawableRes
+    private var defaultIcon: Int = 0
+    private var defaultGravity: Int = 0
+    private var toastIntervalsMinMillis: Long = 2500
+
+    /**
+     * @param defaultGravity  Set the location at which the notification should appear on the screen.
+     * Warning: Starting from Android [Build.VERSION_CODES.R], for apps
+     * targeting API level [Build.VERSION_CODES.R] or higher, this method is a no-op when
+     * called on text toasts.see also[android.view.Gravity] and [Toast.getGravity]
+     *
+     * @param toastIntervalsMinMillis The minimum time interval between two toasts with the same content
+     */
     @JvmStatic
-    fun init(application: Application) {
+    fun init(
+        application: Application,
+        @DrawableRes defaultIcon: Int = this.defaultIcon,
+        defaultGravity: Int = this.defaultGravity,
+        toastIntervalsMinMillis: Long = this.toastIntervalsMinMillis
+    ) {
         app = application
+        this.defaultIcon = defaultIcon
+        this.defaultGravity = defaultGravity
+        this.toastIntervalsMinMillis = toastIntervalsMinMillis
     }
 
-    @JvmStatic
-    fun show(@StringRes message: Int) {
-        show(app.getString(message), Toast.LENGTH_SHORT, 0, 0, null)
-    }
-
+    /**
+     * @param gravity  Set the location at which the notification should appear on the screen.
+     *
+     * Warning: Starting from Android [Build.VERSION_CODES.R], for apps
+     * targeting API level [Build.VERSION_CODES.R] or higher, this method is a no-op when
+     * called on text toasts.
+     *
+     * @see [android.view.Gravity]
+     * @see [Toast.getGravity]
+     */
     @JvmOverloads
     @JvmStatic
     fun show(
-        message: String?,
+        @StringRes message: Int,
         duration: Int = Toast.LENGTH_SHORT,
-        icon: Int = 0,
-        gravity: Int = 0,
+        @DrawableRes icon: Int = defaultIcon,
+        gravity: Int = defaultGravity,
+        onAttachStateChangeListener: View.OnAttachStateChangeListener? = null
+    ) {
+        show(app.getString(message), duration, icon, gravity, onAttachStateChangeListener)
+    }
+
+    /**
+     * @param gravity  Set the location at which the notification should appear on the screen.
+     *
+     * Warning: Starting from Android [Build.VERSION_CODES.R], for apps
+     * targeting API level [Build.VERSION_CODES.R] or higher, this method is a no-op when
+     * called on text toasts.
+     *
+     * @see [android.view.Gravity]
+     * @see [Toast.getGravity]
+     */
+    @SuppressLint("ResourceType")
+    @JvmOverloads
+    @JvmStatic
+    fun show(
+        message: CharSequence?,
+        duration: Int = Toast.LENGTH_SHORT,
+        @DrawableRes icon: Int = defaultIcon,
+        gravity: Int = defaultGravity,
         onAttachStateChangeListener: View.OnAttachStateChangeListener? = null
     ) {
         val showToastRunnable = Runnable {
-            if (!TextUtils.isEmpty(message)) {
+            if (!message.isNullOrEmpty()) {
                 val time = System.currentTimeMillis()
-                if (!message.equals(
-                        lastToast,
-                        ignoreCase = true
-                    ) || Math.abs(time - lastToastTime) > 2500
+                if (!message.contentEquals(lastToast, ignoreCase = false)
+                    || abs(time - lastToastTime) > toastIntervalsMinMillis
+                    || lastDuration != duration
                 ) {
                     if (icon > 0) {
                         val view = LayoutInflater.from(app).inflate(R.layout.view_base_toast, null)
@@ -72,6 +123,7 @@ object ToastUtil {
                         Toast.makeText(app, message, duration).show()
                     }
                     lastToast = message!!
+                    lastDuration = duration
                     lastToastTime = System.currentTimeMillis()
                 }
             }
